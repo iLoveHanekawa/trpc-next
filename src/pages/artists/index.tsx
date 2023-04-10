@@ -34,7 +34,7 @@ export default function ArtistPage() {
         }}>
             <input placeholder="Name" value = {name} onChange = {event => {
                 setName(event.currentTarget.value)
-            }} className = 'border-2 border-gray-300 rounded-md mr-2 indent-1' />
+            }} className = 'border-2 border-gray-300 py-1 rounded-md mr-2 indent-2' />
             <button className = 'bg-blue-300 text-white text-sm rounded-full px-4 py-1'>Add Artist</button>
         </form>
     </div>
