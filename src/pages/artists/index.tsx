@@ -9,10 +9,11 @@ export default function ArtistPage() {
     const { data } = client.artist.findmany.useQuery()
 
     return <div className = 'flex flex-col ml-3 mt-3'>
-        <div>Artists</div>
-        <ul>
+        <div className = 'text-5xl mb-3 text-gray-700'>Artists</div>
+        <hr />
+        <ul className = 'my-2'>
             {data?.map((val, i) => {
-                return <li key = {i}>
+                return <li className = 'text-gray-600' key = {i}>
                     {val.name}
                 </li>
             })}
