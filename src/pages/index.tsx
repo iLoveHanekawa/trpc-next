@@ -1,8 +1,12 @@
 import Head from 'next/head'
 import { Inter } from 'next/font/google'
 const inter = Inter({ subsets: ['latin'] })
+import { client } from '@/utils/trpc'
 
 export default function Home() {
+
+  const { data } = client.hello.useQuery({ text: 'Arjun ' })
+
   return (
     <>
       <Head>
@@ -13,7 +17,7 @@ export default function Home() {
       </Head>
       <main className = {inter.className}>
         <div className = ''>
-          hello
+          { data?.greeting }
         </div>
       </main>
     </>
