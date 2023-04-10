@@ -16,8 +16,14 @@ export default function Home() {
         <link rel="icon" href="/images/favicon.ico" />
       </Head>
       <main className = {inter.className}>
-        <div className = ''>
-          { data?.greeting }
+        <div className = 'flex flex-col'>
+          <div className = 'ml-5 mb-4 text-5xl text-gray-700 mt-5'>tRPC | Client Side | Next.js</div>
+          <hr />
+          <div className = 'ml-5 text-3xl text-gray-600 mt-5'>Objective</div>
+          <div className = 'ml-7 mb-3 text-gray-500'>Implementing tRPC typesafety in Next.js</div>
+          <div className = 'ml-5 mt-2 text-3xl text-gray-600'>Caveat</div>
+          <div className = 'ml-7 mb-5 text-gray-500'>Client Side only | Prisma</div>
+          <hr />
         </div>
       </main>
     </>
