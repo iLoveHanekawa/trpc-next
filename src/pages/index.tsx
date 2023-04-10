@@ -2,7 +2,6 @@ import Head from 'next/head'
 import { Inter } from 'next/font/google'
 const inter = Inter({ subsets: ['latin'] })
 import { client } from '@/utils/trpc'
-import NavBar from '@/components/NavBar'
 
 export default function Home() {
 
@@ -17,7 +16,6 @@ export default function Home() {
         <link rel="icon" href="/images/favicon.ico" />
       </Head>
       <main className = {inter.className}>
-        <NavBar />
         <div className = ''>
           { data?.greeting }
         </div>
