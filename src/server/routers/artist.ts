@@ -2,7 +2,7 @@ import { prisma } from "../../../lib/prisma";
 import { procedure, router } from "../trpc";
 import { z } from 'zod'
 
-const artistRouter = router({
+export const artistRouter = router({
     create: procedure.input(z.object({
         name: z.string()
     })).mutation(async (req) => {
