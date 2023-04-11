@@ -23,6 +23,7 @@ export const albumRouter = router({
                 title: true,
                 artist: {
                     select: {
+                        id: true,
                         name: true
                     }
                 }

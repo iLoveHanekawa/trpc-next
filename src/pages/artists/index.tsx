@@ -1,5 +1,6 @@
 import { client } from "@/utils/trpc"
 import { useState, FormEvent } from 'react'
+import Link from "next/link"
 
 export default function ArtistPage() {
 
@@ -18,9 +19,9 @@ export default function ArtistPage() {
             </div>
             {data?.map((val, i) => {
                 return <li className = 'text-gray-500 pb-1 w-full flex items-center' key = {i}>
-                    <div className = 'w-1/2'>
+                    <Link href = {`/artists/${val.id}`} className = 'w-1/2'>
                         {val.name}                 
-                    </div>
+                    </Link>
                     <div>
                         {val.id}
                     </div>

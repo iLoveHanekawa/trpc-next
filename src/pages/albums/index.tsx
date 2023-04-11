@@ -28,9 +28,9 @@ export default function AlbumsPage() {
                 <Link href = {`/albums/${val.id}`} className = 'w-1/3'>
                     {val.title}                 
                 </Link>
-                <div className = 'w-1/3'>
+                <Link href={`/artists/${val.artist.id}`} className = 'w-1/3'>
                     {val.artist.name}
-                </div>
+                </Link>
                 <div>
                     {val.id}
                 </div>
