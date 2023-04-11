@@ -29,5 +29,25 @@ export const albumRouter = router({
             }
         })
         return albums
+    }),
+    findone: procedure.input(z.object({
+        id: z.string()
+    })).query(async(req) => {
+        const { input } = req
+        const album = await prisma.album.findUnique({
+            select: {
+                title: true,
+                id: true,
+                artist: {
+                    select: {
+                        name: true
+                    }
+                }
+            },
+            where: {
+                id: input.id
+            }
+        })
+        return album
     })
 })
