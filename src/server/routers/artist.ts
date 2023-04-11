@@ -43,5 +43,13 @@ export const artistRouter = router({
             }
         })
         return artist
+    }),
+    delete: procedure.input(z.object({ id: z.string() })).mutation(async(req) => {
+        const { input } = req
+        await prisma.artist.delete({
+            where: {
+                id: input.id
+            }
+        })
     })
 })
