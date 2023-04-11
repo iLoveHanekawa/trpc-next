@@ -55,5 +55,15 @@ export const albumRouter = router({
             }
         })
         return album
+    }),
+    delete: procedure.input(z.object({
+        id: z.string()
+    })).mutation(async(req) => {
+        const { input } = req
+        await prisma.album.delete({
+            where: {
+                id: input.id
+            }
+        })
     })
 })
