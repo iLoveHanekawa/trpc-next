@@ -65,5 +65,20 @@ export const albumRouter = router({
                 id: input.id
             }
         })
+    }),
+    update: procedure.input(z.object({
+        id: z.string(),
+        title: z.string()
+    })).mutation(async(req) => {
+        const { input } = req
+        const album = await prisma.album.update({
+            data: {
+                title: input.title
+            },
+            where: {
+                id: input.id
+            }
+        })
+        return album
     })
 })
