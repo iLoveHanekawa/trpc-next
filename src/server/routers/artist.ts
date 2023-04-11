@@ -51,5 +51,19 @@ export const artistRouter = router({
                 id: input.id
             }
         })
-    })
+    }),
+    update: procedure.input(z.object({ 
+        id: z.string(), 
+        name: z.string() })).mutation(async(req) => {
+            const { input } = req
+            const artist = await prisma.artist.update({
+                data: {
+                    name: input.name
+                },
+                where: {
+                    id: input.id
+                }
+            })
+            return artist
+        })
 })
