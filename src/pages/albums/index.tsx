@@ -6,11 +6,13 @@ type Album = {
     title: string
     artistId: string
     delId: string
+    updateId: string
+    updateTitle: string
 }
 
 export default function AlbumsPage() {
 
-    const [album, setAlbum] = useState<Album>({ title: '', artistId: '', delId: '' })
+    const [album, setAlbum] = useState<Album>({ title: '', artistId: '', delId: '', updateId: '', updateTitle: '' })
 
     const addMutation = client.album.create.useMutation()
     const delMutation = client.album.delete.useMutation()
@@ -61,6 +63,15 @@ export default function AlbumsPage() {
             setAlbum({...album, delId: event.currentTarget.value})
         }} className = 'border-2 py-1 border-gray-300 rounded-md mr-2 indent-2' />
         <button className = 'bg-red-300 text-white text-sm rounded-full px-4 py-1'>Delete Album</button>
+    </form>
+    <form className = 'mt-2'>
+        <input placeholder="Update Id" value = {album.updateId} onChange = {event => {
+            setAlbum({...album, updateId: event.currentTarget.value})
+        }} className = 'border-2 py-1 border-gray-300 rounded-md mr-2 indent-2' />
+        <input placeholder="Update Title" value = {album.updateTitle} onChange = {event => {
+            setAlbum({...album, updateTitle: event.currentTarget.value})
+        }} className = 'border-2 py-1 border-gray-300 rounded-md mr-2 indent-2' />
+        <button className = 'bg-green-300 text-white text-sm rounded-full px-4 py-1'>Update Album</button>
     </form>
 </div>
 }
