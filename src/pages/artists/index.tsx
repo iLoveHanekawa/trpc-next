@@ -57,7 +57,11 @@ export default function ArtistPage() {
             }} className = 'border-2 py-1 border-gray-300 rounded-md mr-2 indent-2' />
             <button className = 'bg-red-300 text-white text-sm rounded-full px-4 py-1'>Delete Artist</button>
         </form>
-        <form className = 'mt-2'>
+        <form onSubmit = {event => {
+            event.preventDefault()
+            updateMutation.mutate({ id: artist.updateId, name: artist.updateName })
+            setArtist({...artist, updateId: '', updateName: ''})
+        }} className = 'mt-2'>
             <input placeholder="Update Id" value = {artist.updateId} onChange = {event => {
                 setArtist({...artist, updateId: event.currentTarget.value})
             }} className = 'border-2 py-1 border-gray-300 rounded-md mr-2 indent-2' />

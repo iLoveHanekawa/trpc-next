@@ -16,6 +16,7 @@ export default function AlbumsPage() {
 
     const addMutation = client.album.create.useMutation()
     const delMutation = client.album.delete.useMutation()
+    const updateMutation = client.album.update.useMutation()
     const { data } = client.album.findmany.useQuery()
 
     return <div className = 'flex flex-col mx-3 mt-3'>
@@ -64,7 +65,11 @@ export default function AlbumsPage() {
         }} className = 'border-2 py-1 border-gray-300 rounded-md mr-2 indent-2' />
         <button className = 'bg-red-300 text-white text-sm rounded-full px-4 py-1'>Delete Album</button>
     </form>
-    <form className = 'mt-2'>
+    <form onSubmit = {event => {
+        event.preventDefault()
+        updateMutation.mutate({ id: album.updateId, title: album.updateTitle })
+        setAlbum({...album, updateId: '', updateTitle: ''})
+    }} className = 'mt-2'>
         <input placeholder="Update Id" value = {album.updateId} onChange = {event => {
             setAlbum({...album, updateId: event.currentTarget.value})
         }} className = 'border-2 py-1 border-gray-300 rounded-md mr-2 indent-2' />
