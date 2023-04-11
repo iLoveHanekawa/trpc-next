@@ -2,11 +2,17 @@ import { client } from "@/utils/trpc"
 import { useState, FormEvent } from 'react'
 import Link from "next/link"
 
+type Artist = {
+    name: string,
+    delId: string
+}
+
 export default function ArtistPage() {
 
-    const [ name, setName ] = useState<string>('')
+    const [ artist, setArtist ] = useState<Artist>({ name: '', delId: '' })
 
     const addMutation = client.artist.create.useMutation()
+    const delMutation = client.artist.delete.useMutation()
     const { data } = client.artist.findmany.useQuery()
 
     return <div className = 'flex flex-col mx-3 mt-3'>
@@ -30,13 +36,23 @@ export default function ArtistPage() {
         </ul>
         <form onSubmit={(e: FormEvent<HTMLFormElement>) => {
             e.preventDefault()
-            addMutation.mutate({ name })
-            setName('')
+            addMutation.mutate({ name: artist.name })
+            setArtist({ ...artist, name: '' })
         }}>
-            <input placeholder="Name" value = {name} onChange = {event => {
-                setName(event.currentTarget.value)
+            <input placeholder="Name" value = {artist.name} onChange = {event => {
+                setArtist({ ...artist, name: event.currentTarget.value })
             }} className = 'border-2 border-gray-300 py-1 rounded-md mr-2 indent-2' />
             <button className = 'bg-blue-300 text-white text-sm rounded-full px-4 py-1'>Add Artist</button>
         </form>
+        <form onSubmit = {(event: FormEvent<HTMLFormElement>) => {
+        event.preventDefault()
+        delMutation.mutate({ id: artist.delId })
+        setArtist({ ...artist, delId: '' })
+    }} className = 'mt-2'>
+        <input placeholder="Delete Id" value = {artist.delId} onChange = {event => {
+            setArtist({...artist, delId: event.currentTarget.value})
+        }} className = 'border-2 py-1 border-gray-300 rounded-md mr-2 indent-2' />
+        <button className = 'bg-red-300 text-white text-sm rounded-full px-4 py-1'>Delete Artist</button>
+    </form>
     </div>
 }
