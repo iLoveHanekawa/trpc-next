@@ -80,5 +80,20 @@ export const albumRouter = router({
             }
         })
         return album
+    }),
+    test: procedure.input(z.object({
+        substring: z.string()
+    })).query(async (req) => {
+        const { input } = req
+        const albums = await prisma.album.findMany({
+            where: {
+                artist: {
+                    name: {
+                        contains: input.substring
+                    }
+                }
+            }
+        })
+        return albums
     })
 })
