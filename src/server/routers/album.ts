@@ -85,11 +85,13 @@ export const albumRouter = router({
         substring: z.string()
     })).query(async (req) => {
         const { input } = req
-        const albums = await prisma.album.findMany({
+        const albums = await prisma.artist.findMany({
             where: {
-                artist: {
-                    name: {
-                        contains: input.substring
+                albums: {
+                    some: {
+                        title: {
+                            contains: input.substring
+                        }
                     }
                 }
             }
